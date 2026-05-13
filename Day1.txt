@@ -1,0 +1,9 @@
+5/13/2026 
+
+Today is day 1 and I'm excited to learn a lot of new things!
+
+Things I've started today is: 
+1. AWS fundamentals and we started with a general discussion on scrum, AWS services, policy, 
+etc. 
+2. Using git/gh cli more 
+3. Installed WSL, AWS & launched my first instance
