@@ -1,0 +1,7 @@
+Day 2 felt shorter. Focused on IAM accounts, organizations, Cloudwatch, reviewed the project options. IAM Roles and Organizations is a lot of content.
+Can't actualy run it on company acct but may want to try it on personal to make sure I understand. all updats are 
+in doc to avoid overcrowding.
+
+In future plan to use this repository for reflections and will keep my own notes separately.
+
+Remind self to review AWS organizations

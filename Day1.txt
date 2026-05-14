@@ -7,3 +7,17 @@ Things I've started today is:
 etc. 
 2. Using git/gh cli more 
 3. Installed WSL, AWS & launched my first instance
+
+Todos:
+1. Always use CLI to perform actions in github or in AWS ✅
+2. Install WSL ✅ and use EC2 key pair to access the EC2 instance ❌ (No access to create granted)
+3. Use AWS CLI to create a S3 bucket ❌ (No access to create)
+4. Update the github repo with daily learning outcomes ✅
+
+Notes to self
+1. When trying to access a policy and face an error I learned that Policy simulator doesn't highlight the explecit denial reason
+2. Policy can require for certain tags; check the policy simulator and AI to diagnose the reason 
+
+Questions for Partha
+1. AutoDelete 7 days: Is normal? We need to keep recreating key every 7 days?
+2. How does CloudFormation exactly work? Writing file to deploy 
