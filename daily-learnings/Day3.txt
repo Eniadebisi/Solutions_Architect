@@ -1,0 +1,55 @@
+While trying to initiate s3 buckets I faced 2 problems.
+
+1. The trainer didn't believe that we didn't have access.
+2. I didn't understand WHY I didn't have access.
+
+At first, trying it in the simulator, it said it SHOULD work. But using AI I realized something;
+I added an extra condition that made it succeed that was available in the simulator but not in the actual console.
+This made me want to try it in the API as with the API, simular to the console, I can add additional configurations that may not be available in the console.
+Also I notcied in the S3 console, nulike the EC2 one there's not json editor viewable and neither a way to add additional configurations.
+
+the missing configuration requirement was that the region should be restricted to us-east-1. This was confusing to me because when buckets were explained to me, even though they are globally unique, they are initially regionally locked. Meaning even without specifying, I thought this should pass.
+The trainer resolved this issue by just bombing the permissions (giving us full S3 access). So I'll never know (today) whether S3:LocationConstraint": "us-east-1" refers to just location of bucket or includes that restriction to region.
+Previously this was our permissions:
+
+        {
+            "Sid": "AllowS3BucketCreation",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:LocationConstraint": "us-east-1"
+                }
+            }
+        },
+        {
+            "Sid": "AllowS3AccessWithoutDelete",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation",
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:s3:::*/*"
+            ]
+        },
+
+This is our permissions now:
+         {
+            "Sid": "FullS3Access",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:s3:::*/*"
+            ]
+        },
+
+Yeah so we got bombed :/
