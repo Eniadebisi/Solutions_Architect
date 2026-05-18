@@ -1,5 +1,3 @@
-This repository will be used to track learnings on projects. Project that will be used for actual implementation is dependent per project.
-
 # Project 1 - Reusable CI/CD Pipeline Framework
 Build a reusable multi-environment CI/CD framework using GitHub Actions, Docker, and AWS.
 
