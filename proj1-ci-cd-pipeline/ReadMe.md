@@ -3,7 +3,7 @@ This repository will be used to track learnings on projects. Project that will b
 # Project 1 - Reusable CI/CD Pipeline Framework
 Build a reusable multi-environment CI/CD framework using GitHub Actions, Docker, and AWS.
 
-## Tools & Technologies
+## Tools
 
 | Tool | Purpose |
 |------|---------|
@@ -20,7 +20,7 @@ Build a reusable multi-environment CI/CD framework using GitHub Actions, Docker,
 
 ---
 
-## Architecture Overview
+## Architecture 
 
 ```
 GitHub Repo (impl)
@@ -98,9 +98,6 @@ feature/* ──► dev ──► qa ──► main
               dev     qa     prod
              cluster cluster cluster
 ```
-```
-
-Two things changed: step 1 now starts from a feature branch off `dev`, steps 4/5 are now auto-triggered by branch merges rather than manual triggers, and the branch mapping diagram makes the promotion path explicit.
 
 ### Rollback Flow
 
@@ -119,8 +116,6 @@ Developer triggers rollback.yml in GitHub Actions
             ▼
     ECS drains current tasks and starts previous revision
 ```
-
----
 
 ## Order of Setup
 
