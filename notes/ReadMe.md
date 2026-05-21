@@ -1,6 +1,6 @@
 # [AWS Certified Solutions Architect - Associate (SAA-C03)](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html)
 
-## Domain 1: [Design Secure Architectures](https://github.com/Eniadebisi/Solutions_Architect/blob/master/notes/1/Overview.md#domain-1-design-secure-architectures-30) (30%)
+## Domain 1: [Design Secure Architectures](1/Overview.md) (30%)
 
 * **Identity & Access:** [AWS IAM](https://docs.aws.amazon.com/iam/), [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/), [AWS STS](https://www.google.com/search?q=https://docs.aws.amazon.com/STS/)
 * **Governance & Multi-Account:** [AWS Organizations](https://docs.aws.amazon.com/organizations/), [AWS Control Tower](https://docs.aws.amazon.com/controltower/)
