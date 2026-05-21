@@ -1,0 +1,154 @@
+# AWS SAA-C03 Progress Tracker
+
+# 1. Compute & Containers
+  - [ ] **EC2**
+    - [ ] Choose appropriate instance families (Compute, Memory, Storage optimized)
+    - [ ] Evaluate purchasing options (Spot vs. On-Demand vs. RI vs. Savings Plans)
+    - [ ] Configure User Data scripts for automated bootstrapping
+    - [ ] Analyze Instance Store (ephemeral) vs. EBS persistence
+    - [Details]() | [MCP]()
+  - [ ] **Auto Scaling**
+    - [ ] Configure Launch Templates and Auto Scaling Groups (ASG)
+    - [ ] Implement scaling policies (Target tracking, Step, Simple)
+    - [ ] Manage Lifecycle hooks for custom initialization or teardown actions
+    - [Details]() | [MCP]()
+  - [ ] **Lambda**
+    - [ ] Understand execution limits, timeouts, and memory allocation
+    - [ ] Configure VPC integration (ENI provisioning, subnets, security groups)
+    - [ ] Implement event-driven triggers and execution error-handling
+    - [Details]() | [MCP]()
+  - [ ] **ECS**
+    - [ ] Define Tasks, Services, and Task Definitions (IAM roles, logging)
+    - [ ] Compare EC2 launch type vs. AWS Fargate deployment models
+    - [Details]() | [MCP]()
+  - [ ] **EKS**
+    - [ ] Understand Managed Node Groups and Fargate integration
+    - [ ] Architect control plane high availability across Availability Zones
+    - [Details]() | [MCP]()
+  - [ ] **Fargate**
+    - [ ] Deploy serverless containers without managing underlying infrastructure
+    - [ ] Configure container storage options and networking attributes
+    - [Details]() | [MCP]()
+
+# 2. Networking
+  - [ ] **VPC**
+    - [ ] Design subnets (Public vs. Private), Route Tables, and Internet Gateways
+    - [ ] Implement network isolation via Security Groups (stateful) and NACLs (stateless)
+    - [ ] Deploy highly available NAT Gateways or NAT Instances
+    - [ ] Provision VPC Endpoints (Interface via PrivateLink vs. Gateway for S3/DynamoDB)
+    - [ ] Analyze traffic flow using VPC Flow Logs
+    - [Details]() | [MCP]()
+  - [ ] **Route 53**
+    - [ ] Apply routing policies (Simple, Weighted, Latency, Failover, Geolocation, Geoproximity)
+    - [ ] Configure Route 53 Health Checks for active-passive failover architectures
+    - [ ] Resolve DNS queries between on-premises and VPCs via Route 53 Resolver
+    - [Details]() | [MCP]()
+  - [ ] **CloudFront**
+    - [ ] Configure Cache Behaviors, TTL values, and cache invalidation patterns
+    - [ ] Restrict origin access via Origin Access Control (OAC) for S3 buckets
+    - [ ] Evaluate CloudFront Functions vs. Lambda@Edge for edge-side manipulations
+    - [Details]() | [MCP]()
+  - [ ] **Global Accelerator**
+    - [ ] Optimize global traffic ingest using Anycast static IP addresses
+    - [ ] Set up instant failover across multiple AWS Regions
+    - [Details]() | [MCP]()
+  - [ ] **Transit Gateway**
+    - [ ] Centralize VPC hub-and-spoke connectivity architectures
+    - [ ] Manage routing tables across cross-account setups and AWS Organizations
+    - [Details]() | [MCP]()
+
+# 3. Storage
+  - [ ] **S3**
+    - [ ] Map access patterns to storage classes (Standard, IA, Intelligent-Tiering, Glacier)
+    - [ ] Automate objects data migrations via Lifecycle Rules
+    - [ ] Enforce security using Bucket Policies, Object Locks, and Versioning
+    - [Details]() | [MCP]()
+  - [ ] **EBS**
+    - [ ] Match performance requirements to volume types (`gp3`, `io2`, `st1`, `sc1`)
+    - [ ] Configure EBS Multi-Attach for concurrent EC2 cluster access
+    - [ ] Manage incremental backups via EBS Snapshots and Lifecycle Manager
+    - [Details]() | [MCP]()
+  - [ ] **EFS**
+    - [ ] Implement POSIX-compliant, concurrent file storage across multiple AZs
+    - [ ] Balance costs via General Purpose vs. Max I/O modes and Lifecycle management
+    - [Details]() | [MCP]()
+  - [ ] **FSx**
+    - [ ] Deploy optimized third-party filesystems (Lustre, Windows File Server, NetApp ONTAP)
+    - [Details]() | [MCP]()
+  - [ ] **Storage Gateway**
+    - [ ] Integrate hybrid environments using Volume Gateway, File Gateway, or Tape Gateway
+    - [Details]() | [MCP]()
+
+# 4. Databases
+  - [ ] **RDS**
+    - [ ] Design synchronous replication for disaster recovery (Multi-AZ)
+    - [ ] Offload read traffic to asynchronous Read Replicas (cross-region capability)
+    - [Details]() | [MCP]()
+  - [ ] **Aurora**
+    - [ ] Architect storage scaling with automatic multi-AZ copy replication
+    - [ ] Implement Aurora Serverless v2 for unpredictable application workloads
+    - [ ] Design low-latency cross-region systems via Aurora Global Databases
+    - [Details]() | [MCP]()
+  - [ ] **DynamoDB**
+    - [ ] Select appropriate Partition Keys and Sort Keys for optimal data distribution
+    - [ ] Manage throughput capabilities via Provisioned (WCU/RCU) vs. On-Demand models
+    - [ ] Accelerate read latencies to microsecond scales using DynamoDB Accelerator (DAX)
+    - [ ] Capture real-time modifications via DynamoDB Streams
+    - [Details]() | [MCP]()
+  - [ ] **ElastiCache**
+    - [ ] Evaluate Redis (Complex structures, HA) vs. Memcached (Simple string cache, multi-threaded)
+    - [Details]() | [MCP]()
+  - [ ] **Redshift**
+    - [ ] Design OLAP architectures using RA3 instances with decoupled compute/storage
+    - [ ] Query external data assets in S3 directly using Redshift Spectrum
+    - [Details]() | [MCP]()
+  - [ ] **DocumentDB**
+    - [ ] Migrate and run scalable MongoDB-compatible JSON workloads
+    - [Details]() | [MCP]()
+
+# 5. Integration & Analytics
+  - [ ] **SQS**
+    - [ ] Mitigate duplicate delivery risks (Standard vs. FIFO queues)
+    - [ ] Handle failures using Dead-Letter Queues (DLQ) and tuning Visibility Timeouts
+    - [Details]() | [MCP]()
+  - [ ] **SNS**
+    - [ ] Broadcast notifications using Pub/Sub architectures and Fan-out patterns
+    - [ ] Restrict subscriber traffic delivery using Filter Policies
+    - [Details]() | [MCP]()
+  - [ ] **EventBridge**
+    - [ ] Construct decoupled, event-driven architectures with custom Event Buses
+    - [ ] Enforce data formatting controls via the EventBridge Schema Registry
+    - [Details]() | [MCP]()
+  - [ ] **Step Functions**
+    - [ ] Orchestrate multi-service microservices workflows using State Machines
+    - [ ] Implement native Retry, Catch, and error handling behaviors
+    - [Details]() | [MCP]()
+  - [ ] **Kinesis**
+    - [ ] Build real-time streaming ingest channels via Kinesis Data Streams (sharding limits)
+    - [ ] Deliver high-throughput streams directly to destinations via Kinesis Data Firehose
+    - [Details]() | [MCP]()
+
+# **6. Security & Governance**
+  - [ ] **IAM**
+    - [ ] Apply Principle of Least Privilege across IAM policies (Identity-based vs. Resource-based)
+    - [ ] Implement secure temporary credential access using IAM Roles and cross-account STS
+    - [ ] Restrict maximal potential boundaries using Permission Boundaries
+    - [Details]() | [MCP]()
+  - [ ] **KMS**
+    - [ ] Manage key access control using Customer Managed Keys (CMKs) vs. AWS Managed Keys
+    - [ ] Enforce granular multi-account access rules via Key Policies
+    - [Details]() | [MCP]()
+  - [ ] **Organizations**
+    - [ ] Restrict top-level runtime capabilities using Service Control Policies (SCPs)
+    - [ ] Consolidate billing and lifecycle control structures into target OUs
+    - [Details]() | [MCP]()
+  - [ ] **WAF**
+    - [ ] Defend application entry points via malicious IP matching and SQL injection rules
+    - [Details]() | [MCP]()
+  - [ ] **Shield**
+    - [ ] Differentiate basic volumetric layer DDoS mitigation from Shield Advanced protection
+    - [Details]() | [MCP]()
+  - [ ] **Secrets Manager**
+    - [ ] Securely store database credentials with automated key rotation routines
+    - [Details]() | [MCP]()
+
