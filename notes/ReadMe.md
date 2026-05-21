@@ -10,7 +10,7 @@
 * **Threat Detection & Compliance:** [Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/), [Amazon Macie](https://docs.aws.amazon.com/macie/), [AWS Inspector](https://docs.aws.amazon.com/inspector/), [AWS Config](https://docs.aws.amazon.com/config/)
 * **Secrets Management:** [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/), [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
-## Domain 2: [Design Resilient Architectures](https://github.com/Eniadebisi/Solutions_Architect/blob/master/notes/2/Overview.md#domain-2-design-resilient-architectures-26) (26%)
+## Domain 2: [Design Resilient Architectures](2/Overview.md) (26%)
 
 * **Compute Availability:** [Amazon EC2 Auto Scaling](https://www.google.com/search?q=https://docs.aws.amazon.com/autoscaling/ec2/), [AWS Lambda](https://docs.aws.amazon.com/lambda/)
 * **Traffic Management:** [Elastic Load Balancing (ALB/NLB/GLB)](https://docs.aws.amazon.com/elasticloadbalancing/), [Amazon Route 53](https://docs.aws.amazon.com/route53/)
@@ -20,7 +20,7 @@
 * **Database Resilience:** [Amazon RDS Proxy](https://www.google.com/search?q=https://docs.aws.amazon.com/rds/proxy/), [Amazon Aurora (Global Databases/Multi-AZ)](https://www.google.com/search?q=https://docs.aws.amazon.com/rds/latest/AuroraUserGuide/aurora-global-databases.html)
 * **Observability:** [Amazon CloudWatch](https://docs.aws.amazon.com/cloudwatch/), [AWS X-Ray](https://docs.aws.amazon.com/xray/)
 
-## Domain 3: [Design High-Performing Architectures](https://github.com/Eniadebisi/Solutions_Architect/blob/master/notes/3/Overview.md#domain-3-design-high-performing-architectures-24) (24%)
+## Domain 3: [Design High-Performing Architectures](3/Overview.md) (24%)
 
 * **High-Performance Storage:** [Amazon EBS (io2/gp3)](https://docs.aws.amazon.com/ebs/), [Amazon EFS](https://docs.aws.amazon.com/efs/), [Amazon FSx (Lustre/ONTAP)](https://docs.aws.amazon.com/fsx/)
 * **Caching & Content Delivery:** [Amazon CloudFront](https://docs.aws.amazon.com/cloudfront/), [Amazon ElastiCache (Redis/Memcached)](https://docs.aws.amazon.com/elasticache/)
@@ -30,7 +30,7 @@
 * **Analytics & Big Data:** [Amazon Athena](https://docs.aws.amazon.com/athena/), [Amazon EMR](https://docs.aws.amazon.com/emr/), [AWS Glue](https://docs.aws.amazon.com/glue/), [Amazon Redshift](https://docs.aws.amazon.com/redshift/)
 
 
-## Domain 4: [Design Cost-Optimized Architectures](https://github.com/Eniadebisi/Solutions_Architect/blob/master/notes/4/Overview.md#domain-4-design-cost-optimized-architectures-20) (20%)
+## Domain 4: [Design Cost-Optimized Architectures](4/Overview.md) (20%)
 
 * **Storage Tiering:** [Amazon S3 Lifecycle Policies (Glacier Flexible/Deep Archive)](https://docs.aws.amazon.com/s3/)
 * **Data Migration & Hybrid:** [AWS Storage Gateway](https://docs.aws.amazon.com/storagegateway/), [AWS DataSync](https://docs.aws.amazon.com/datasync/), [AWS Transfer Family](https://docs.aws.amazon.com/transfer/)
