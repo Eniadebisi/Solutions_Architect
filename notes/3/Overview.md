@@ -1,4 +1,5 @@
-# 
+# Domain 3: Design High-Performing Architectures (24%)
+
 ## [Amazon EBS & Amazon EFS](https://docs.aws.amazon.com/ebs/)
 - [ ] Select block volume classes (`gp3`, `io2 Block Express`) matching targeted IOPS/throughput limits.
 - [ ] Implement EBS Multi-Attach patterns to support clustered compute operations.
