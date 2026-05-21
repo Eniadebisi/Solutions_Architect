@@ -1,6 +1,6 @@
 # Domain 1: Design Secure Architectures (30%)
 
-## [IAM (Identity and Access Management]() - [AWS Doc)](https://docs.aws.amazon.com/iam/)
+## [IAM (Identity and Access Management]() - [AWS Doc](https://docs.aws.amazon.com/iam/)
 - [ ] Implement multi-factor authentication (MFA) for root and administrative users.
 - [ ] Build a flexible authorization model using IAM groups, customer-managed policies, and inline boundaries.
 - [ ] Establish role-based access control (RBAC) across cross-account structures using [STS](https://docs.aws.amazon.com/STS/) assume-role mechanisms.
