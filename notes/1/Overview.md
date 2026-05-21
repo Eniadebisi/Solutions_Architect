@@ -3,7 +3,7 @@
 ## [IAM (Identity and Access Management)](https://docs.aws.amazon.com/iam/)
 - [ ] Implement multi-factor authentication (MFA) for root and administrative users.
 - [ ] Build a flexible authorization model using IAM groups, customer-managed policies, and inline boundaries.
-- [ ] Establish role-based access control (RBAC) across cross-account structures using [AWS STS](https://docs.aws.amazon.com/STS/) assume-role mechanisms.
+- [ ] Establish role-based access control (RBAC) across cross-account structures using [STS](https://docs.aws.amazon.com/STS/) assume-role mechanisms.
 - [ ] Configure resource-based policies for S3 and KMS to allow cross-account principal actions.
 - [ ] Integrate external directory services (SAML 2.0, OIDC) with IAM role trust relationships.
 
