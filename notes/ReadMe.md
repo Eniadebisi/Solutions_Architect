@@ -1,154 +1,139 @@
-# AWS SAA-C03 Progress Tracker
+# [AWS Certified Solutions Architect - Associate (SAA-C03)](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html)
 
-# 1. Compute & Containers
-  - [ ] **EC2**
-    - [ ] Choose appropriate instance families (Compute, Memory, Storage optimized)
-    - [ ] Evaluate purchasing options (Spot vs. On-Demand vs. RI vs. Savings Plans)
-    - [ ] Configure User Data scripts for automated bootstrapping
-    - [ ] Analyze Instance Store (ephemeral) vs. EBS persistence
-    - [Details]() | [MCP]()
-  - [ ] **Auto Scaling**
-    - [ ] Configure Launch Templates and Auto Scaling Groups (ASG)
-    - [ ] Implement scaling policies (Target tracking, Step, Simple)
-    - [ ] Manage Lifecycle hooks for custom initialization or teardown actions
-    - [Details]() | [MCP]()
-  - [ ] **Lambda**
-    - [ ] Understand execution limits, timeouts, and memory allocation
-    - [ ] Configure VPC integration (ENI provisioning, subnets, security groups)
-    - [ ] Implement event-driven triggers and execution error-handling
-    - [Details]() | [MCP]()
-  - [ ] **ECS**
-    - [ ] Define Tasks, Services, and Task Definitions (IAM roles, logging)
-    - [ ] Compare EC2 launch type vs. AWS Fargate deployment models
-    - [Details]() | [MCP]()
-  - [ ] **EKS**
-    - [ ] Understand Managed Node Groups and Fargate integration
-    - [ ] Architect control plane high availability across Availability Zones
-    - [Details]() | [MCP]()
-  - [ ] **Fargate**
-    - [ ] Deploy serverless containers without managing underlying infrastructure
-    - [ ] Configure container storage options and networking attributes
-    - [Details]() | [MCP]()
+## Domain 1: Design Secure Architectures (30%)
 
-# 2. Networking
-  - [ ] **VPC**
-    - [ ] Design subnets (Public vs. Private), Route Tables, and Internet Gateways
-    - [ ] Implement network isolation via Security Groups (stateful) and NACLs (stateless)
-    - [ ] Deploy highly available NAT Gateways or NAT Instances
-    - [ ] Provision VPC Endpoints (Interface via PrivateLink vs. Gateway for S3/DynamoDB)
-    - [ ] Analyze traffic flow using VPC Flow Logs
-    - [Details]() | [MCP]()
-  - [ ] **Route 53**
-    - [ ] Apply routing policies (Simple, Weighted, Latency, Failover, Geolocation, Geoproximity)
-    - [ ] Configure Route 53 Health Checks for active-passive failover architectures
-    - [ ] Resolve DNS queries between on-premises and VPCs via Route 53 Resolver
-    - [Details]() | [MCP]()
-  - [ ] **CloudFront**
-    - [ ] Configure Cache Behaviors, TTL values, and cache invalidation patterns
-    - [ ] Restrict origin access via Origin Access Control (OAC) for S3 buckets
-    - [ ] Evaluate CloudFront Functions vs. Lambda@Edge for edge-side manipulations
-    - [Details]() | [MCP]()
-  - [ ] **Global Accelerator**
-    - [ ] Optimize global traffic ingest using Anycast static IP addresses
-    - [ ] Set up instant failover across multiple AWS Regions
-    - [Details]() | [MCP]()
-  - [ ] **Transit Gateway**
-    - [ ] Centralize VPC hub-and-spoke connectivity architectures
-    - [ ] Manage routing tables across cross-account setups and AWS Organizations
-    - [Details]() | [MCP]()
+### [AWS IAM (Identity and Access Management)](https://docs.aws.amazon.com/iam/)
+- [ ] Implement multi-factor authentication (MFA) for root and administrative users.
+- [ ] Build a flexible authorization model using IAM groups, customer-managed policies, and inline boundaries.
+- [ ] Establish role-based access control (RBAC) across cross-account structures using [AWS STS](https://docs.aws.amazon.com/STS/) assume-role mechanisms.
+- [ ] Configure resource-based policies for Amazon S3 and AWS KMS to allow cross-account principal actions.
+- [ ] Integrate external directory services (SAML 2.0, OIDC) with IAM role trust relationships.
 
-# 3. Storage
-  - [ ] **S3**
-    - [ ] Map access patterns to storage classes (Standard, IA, Intelligent-Tiering, Glacier)
-    - [ ] Automate objects data migrations via Lifecycle Rules
-    - [ ] Enforce security using Bucket Policies, Object Locks, and Versioning
-    - [Details]() | [MCP]()
-  - [ ] **EBS**
-    - [ ] Match performance requirements to volume types (`gp3`, `io2`, `st1`, `sc1`)
-    - [ ] Configure EBS Multi-Attach for concurrent EC2 cluster access
-    - [ ] Manage incremental backups via EBS Snapshots and Lifecycle Manager
-    - [Details]() | [MCP]()
-  - [ ] **EFS**
-    - [ ] Implement POSIX-compliant, concurrent file storage across multiple AZs
-    - [ ] Balance costs via General Purpose vs. Max I/O modes and Lifecycle management
-    - [Details]() | [MCP]()
-  - [ ] **FSx**
-    - [ ] Deploy optimized third-party filesystems (Lustre, Windows File Server, NetApp ONTAP)
-    - [Details]() | [MCP]()
-  - [ ] **Storage Gateway**
-    - [ ] Integrate hybrid environments using Volume Gateway, File Gateway, or Tape Gateway
-    - [Details]() | [MCP]()
+### [AWS IAM Identity Center / AWS Organizations](https://docs.aws.amazon.com/organizations/)
+- [ ] Design multi-account architecture landing zones with centralized single sign-on via Identity Center.
+- [ ] Enforce guardrails across Organizational Units (OUs) utilizing Service Control Policies (SCPs).
+- [ ] Standardize environments via [AWS Control Tower](https://docs.aws.amazon.com/controltower/) account factory mechanics.
 
-# 4. Databases
-  - [ ] **RDS**
-    - [ ] Design synchronous replication for disaster recovery (Multi-AZ)
-    - [ ] Offload read traffic to asynchronous Read Replicas (cross-region capability)
-    - [Details]() | [MCP]()
-  - [ ] **Aurora**
-    - [ ] Architect storage scaling with automatic multi-AZ copy replication
-    - [ ] Implement Aurora Serverless v2 for unpredictable application workloads
-    - [ ] Design low-latency cross-region systems via Aurora Global Databases
-    - [Details]() | [MCP]()
-  - [ ] **DynamoDB**
-    - [ ] Select appropriate Partition Keys and Sort Keys for optimal data distribution
-    - [ ] Manage throughput capabilities via Provisioned (WCU/RCU) vs. On-Demand models
-    - [ ] Accelerate read latencies to microsecond scales using DynamoDB Accelerator (DAX)
-    - [ ] Capture real-time modifications via DynamoDB Streams
-    - [Details]() | [MCP]()
-  - [ ] **ElastiCache**
-    - [ ] Evaluate Redis (Complex structures, HA) vs. Memcached (Simple string cache, multi-threaded)
-    - [Details]() | [MCP]()
-  - [ ] **Redshift**
-    - [ ] Design OLAP architectures using RA3 instances with decoupled compute/storage
-    - [ ] Query external data assets in S3 directly using Redshift Spectrum
-    - [Details]() | [MCP]()
-  - [ ] **DocumentDB**
-    - [ ] Migrate and run scalable MongoDB-compatible JSON workloads
-    - [Details]() | [MCP]()
+### [Amazon VPC Security & Core Networking](https://docs.aws.amazon.com/vpc/)
+- [ ] Implement network segmentation with strict Public/Private subnet route configurations.
+- [ ] Configure stateful Security Groups and stateless Network Access Control Lists (NACLs) to manage traffic ports/protocols.
+- [ ] Establish secure ingestion points via [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/) VPC Interface Endpoints.
+- [ ] Capture fine-grained ingestion access telemetry via VPC Flow Logs.
 
-# 5. Integration & Analytics
-  - [ ] **SQS**
-    - [ ] Mitigate duplicate delivery risks (Standard vs. FIFO queues)
-    - [ ] Handle failures using Dead-Letter Queues (DLQ) and tuning Visibility Timeouts
-    - [Details]() | [MCP]()
-  - [ ] **SNS**
-    - [ ] Broadcast notifications using Pub/Sub architectures and Fan-out patterns
-    - [ ] Restrict subscriber traffic delivery using Filter Policies
-    - [Details]() | [MCP]()
-  - [ ] **EventBridge**
-    - [ ] Construct decoupled, event-driven architectures with custom Event Buses
-    - [ ] Enforce data formatting controls via the EventBridge Schema Registry
-    - [Details]() | [MCP]()
-  - [ ] **Step Functions**
-    - [ ] Orchestrate multi-service microservices workflows using State Machines
-    - [ ] Implement native Retry, Catch, and error handling behaviors
-    - [Details]() | [MCP]()
-  - [ ] **Kinesis**
-    - [ ] Build real-time streaming ingest channels via Kinesis Data Streams (sharding limits)
-    - [ ] Deliver high-throughput streams directly to destinations via Kinesis Data Firehose
-    - [Details]() | [MCP]()
+### [AWS Edge Security & Perimeter Defense](https://docs.aws.amazon.com/waf/)
+- [ ] Defend application layer workloads from SQL injection and cross-site scripting using AWS WAF Web ACLs.
+- [ ] Deploy [AWS Shield Advanced](https://docs.aws.amazon.com/shield/) to mitigate volumetric DDoS threat vectors.
+- [ ] Secure hybrid connections with [AWS Site-to-Site VPN](https://docs.aws.amazon.com/vpn/) and [AWS Direct Connect](https://docs.aws.amazon.com/directconnect/).
+- [ ] Implement managed detection utilizing [Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/) and data classification via [Amazon Macie](https://docs.aws.amazon.com/macie/).
 
-# **6. Security & Governance**
-  - [ ] **IAM**
-    - [ ] Apply Principle of Least Privilege across IAM policies (Identity-based vs. Resource-based)
-    - [ ] Implement secure temporary credential access using IAM Roles and cross-account STS
-    - [ ] Restrict maximal potential boundaries using Permission Boundaries
-    - [Details]() | [MCP]()
-  - [ ] **KMS**
-    - [ ] Manage key access control using Customer Managed Keys (CMKs) vs. AWS Managed Keys
-    - [ ] Enforce granular multi-account access rules via Key Policies
-    - [Details]() | [MCP]()
-  - [ ] **Organizations**
-    - [ ] Restrict top-level runtime capabilities using Service Control Policies (SCPs)
-    - [ ] Consolidate billing and lifecycle control structures into target OUs
-    - [Details]() | [MCP]()
-  - [ ] **WAF**
-    - [ ] Defend application entry points via malicious IP matching and SQL injection rules
-    - [Details]() | [MCP]()
-  - [ ] **Shield**
-    - [ ] Differentiate basic volumetric layer DDoS mitigation from Shield Advanced protection
-    - [Details]() | [MCP]()
-  - [ ] **Secrets Manager**
-    - [ ] Securely store database credentials with automated key rotation routines
-    - [Details]() | [MCP]()
+### [AWS KMS & Data Encryption](https://docs.aws.amazon.com/kms/)
+- [ ] Implement encryption-at-rest across data planes utilizing Customer Managed Keys (CMKs) vs AWS Managed Keys.
+- [ ] Define explicit resource access controls via KMS Key Policies.
+- [ ] Automate envelope encryption workflows alongside scheduled key rotation routines.
+- [ ] Provision encryption-in-transit certificates using [AWS Certificate Manager (ACM)](https://docs.aws.amazon.com/acm/) tied to TLS endpoints.
+
+---
+
+## Domain 2: Design Resilient Architectures (26%)
+
+### [Amazon Route 53](https://docs.aws.amazon.com/route53/)
+- [ ] Configure DNS routing policies: Latency, Geolocation, Geoproximity, and Weighted distribution.
+- [ ] Design active-passive failover mechanisms driven by Route 53 Health Checks.
+- [ ] Resolve split-horizon hybrid DNS architectures using Route 53 Resolver endpoints.
+
+### [Amazon EC2 Auto Scaling & Elastic Load Balancing (ELB)](https://docs.aws.amazon.com/autoscaling/ec2/)
+- [ ] Deploy multi-AZ infrastructure topologies using Application Load Balancers (ALB) and Network Load Balancers (NLB).
+- [ ] Set up Auto Scaling Groups (ASG) with Dynamic Scaling policies (Target Tracking, Step, Simple).
+- [ ] Handle stateful instance teardown gracefully using Auto Scaling Lifecycle Hooks.
+
+### [AWS Lambda & AWS Fargate](https://docs.aws.amazon.com/lambda/)
+- [ ] Architect stateless microservices layers using event-driven Lambda execution models.
+- [ ] Enforce memory allocation boundaries and compute timeout limits.
+- [ ] Package and run serverless, containerized workloads via Fargate integrated with [Amazon ECS](https://docs.aws.amazon.com/ecs/) or [Amazon EKS](https://docs.aws.amazon.com/eks/).
+
+### [Amazon SQS & Amazon SNS](https://docs.aws.amazon.com/sqs/)
+- [ ] Loose-couple distributed sub-systems using Standard vs FIFO message queues.
+- [ ] Isolate ingestion or compute payload faults via SQS Dead-Letter Queues (DLQs) and Visibility Timeouts.
+- [ ] Broadcast pub/sub messaging topologies utilizing SNS Fan-out architectures and Subscription Filter Policies.
+
+### [AWS Application Integration & Orchestration](https://docs.aws.amazon.com/step-functions/)
+- [ ] Orchestrate multi-tier application workflows through state machine state tracking via AWS Step Functions.
+- [ ] Standardize event-driven microservice networks using [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/) buses.
+- [ ] Manage secure file ingest channels via [AWS Transfer Family](https://docs.aws.amazon.com/transfer/).
+
+### [AWS CloudWatch & AWS X-Ray](https://docs.aws.amazon.com/cloudwatch/)
+- [ ] Implement comprehensive workload visibility across distributed microservices with X-Ray tracing.
+- [ ] Create automation routines to maintain infrastructure integrity based on CloudWatch Metrics and Alarms.
+
+---
+
+## Domain 3: Design High-Performing Architectures (24%)
+
+### [Amazon EBS & Amazon EFS](https://docs.aws.amazon.com/ebs/)
+- [ ] Select block volume classes (`gp3`, `io2 Block Express`) matching targeted IOPS/throughput limits.
+- [ ] Implement EBS Multi-Attach patterns to support clustered compute operations.
+- [ ] Deploy POSIX-compliant file systems using EFS with appropriate Provisioned/Elastic throughput and General Purpose/Max I/O performance profiles.
+
+### [Amazon S3 (Simple Storage Service)](https://docs.aws.amazon.com/s3/)
+- [ ] Optimize high-throughput key-prefix data request rates on S3 buckets.
+- [ ] Accelerate file uploads by configuring Multipart Upload mechanics.
+- [ ] Streamline low-latency content distribution by proxying S3 origins behind [Amazon CloudFront](https://docs.aws.amazon.com/cloudfront/).
+
+### [Amazon RDS & Amazon Aurora](https://docs.aws.amazon.com/rds/)
+- [ ] Mitigate read-intensive workload constraints by scaling out asynchronous Read Replicas.
+- [ ] Implement [Amazon RDS Proxy](https://docs.aws.amazon.com/rds/proxy/) pools to optimize application connection scaling limits.
+- [ ] Design ultra-low-latency distributed configurations using Aurora Global Databases.
+
+### [Amazon DynamoDB & Amazon ElastiCache](https://docs.aws.amazon.com/amazondynamodb/)
+- [ ] Structuralize schema data distribution using optimal Partition Keys (PK) and Sort Keys (SK).
+- [ ] Manage throughput constraints using Provisioned (RCU/WCU) vs On-Demand capacity modes.
+- [ ] Achieve sub-millisecond data read returns by fronting tables with DynamoDB Accelerator (DAX).
+- [ ] Integrate caching strategies via ElastiCache (Redis OSS vs Memcached) to minimize primary database stress.
+
+### [Amazon CloudFront & AWS Global Accelerator](https://docs.aws.amazon.com/cloudfront/)
+- [ ] Cache dynamic and static web content at global edge locations using optimized Cache Behaviors and TTLs.
+- [ ] Optimize network ingress bottlenecks over the AWS global network using Anycast IPs on Global Accelerator.
+
+### [Amazon Kinesis](https://docs.aws.amazon.com/kinesis/)
+- [ ] Architect high-volume data streaming pipelines using Kinesis Data Streams.
+- [ ] Calculate ingestion partition limits through active shard tuning.
+- [ ] Stream real-time analytical ingest to storage sinks using Kinesis Data Firehose.
+
+### [AWS Analytical Processing & Big Data](https://docs.aws.amazon.com/athena/)
+- [ ] Perform serverless, ad-hoc queries against unstructured S3 data pools using Amazon Athena.
+- [ ] Provision big-data cluster frameworks utilizing [Amazon EMR](https://docs.aws.amazon.com/emr/).
+- [ ] Build automated ETL data transform operations across schemas using [AWS Glue](https://docs.aws.amazon.com/glue/).
+- [ ] Deploy petabyte-scale data warehouse solutions with [Amazon Redshift](https://docs.aws.amazon.com/redshift/).
+
+---
+
+## Domain 4: Design Cost-Optimized Architectures (20%)
+
+### [Amazon S3 Lifecycle Management](https://docs.aws.amazon.com/s3/)
+- [ ] Implement object tiering configurations (Standard-IA, One Zone-IA, Glacier Flexible, Glacier Deep Archive).
+- [ ] Automate object migrations and expirations based on retention patterns using S3 Lifecycle Rules.
+- [ ] Assess cross-entity upload billing distributions via S3 Requester Pays settings.
+
+### [AWS Storage Migration & Hybrid Storage](https://docs.aws.amazon.com/storagegateway/)
+- [ ] Bridge local environments with cloud storage targets using AWS Storage Gateway (File, Volume, Tape).
+- [ ] Migrate bulk data repositories over network paths using [AWS DataSync](https://docs.aws.amazon.com/datasync/).
+- [ ] Assess workloads against managed network file stores using [Amazon FSx](https://docs.aws.amazon.com/fsx/) configurations.
+
+### [AWS Compute Purchasing & Optimization](https://docs.aws.amazon.com/ec2/)
+- [ ] Align elastic runtime compute patterns to cost-optimized models: Spot Instances, Reserved Instances (RIs), and Savings Plans.
+- [ ] Implement EC2 Hibernation behaviors to conserve compute state costs during idle hours.
+- [ ] Analyze resource sizing recommendations via [AWS Compute Optimizer](https://docs.aws.amazon.com/compute-optimizer/).
+
+### [AWS Network Cost Management](https://docs.aws.amazon.com/vpc/)
+- [ ] Architect cost-efficient internet egress routes (Shared NAT Gateways vs NAT Gateways per AZ vs NAT Instances).
+- [ ] Mitigate data transfer fees by routing traffic through VPC Endpoints instead of crossing public routing layers.
+- [ ] Evaluate multi-account backbone interconnections via [AWS Transit Gateway](https://docs.aws.amazon.com/transit-gateway/) vs VPC Peering.
+
+### [AWS Cost Governance Tools](https://docs.aws.amazon.com/cost-management/)
+- [ ] Organize enterprise infrastructure expenditures using Cost Allocation Tags.
+- [ ] Set up budget alerts and threshold notifications via AWS Budgets.
+- [ ] Perform historical analysis on cross-account expenditures using AWS Cost Explorer and Cost and Usage Reports (CUR).wwdwd
+
+
+
 
