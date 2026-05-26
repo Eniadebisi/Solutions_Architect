@@ -16,7 +16,7 @@ resource "aws_cloudwatch_metric_alarm" "public_cpu_high" {
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 300 
+  period              = 300
   statistic           = "Average"
   threshold           = 80
   alarm_description   = "CPU above 80% for 10 minutes on public EC2"
@@ -76,11 +76,11 @@ resource "aws_cloudwatch_dashboard" "main" {
         width  = 12
         height = 6
         properties = {
-          title  = "EC2 CPU Utilization"
-          view   = "timeSeries"
-          region  = var.aws_region
-          period = 300
-          stat   = "Average"
+          title       = "EC2 CPU Utilization"
+          view        = "timeSeries"
+          region      = var.aws_region
+          period      = 300
+          stat        = "Average"
           annotations = { horizontal = [] }
           metrics = [
             ["AWS/EC2", "CPUUtilization", "InstanceId", var.public_instance_id],
@@ -95,14 +95,14 @@ resource "aws_cloudwatch_dashboard" "main" {
         width  = 12
         height = 6
         properties = {
-          title  = "EC2 Network In/Out"
-          view   = "timeSeries"
-          region  = var.aws_region
-          period = 300
-          stat   = "Average"
+          title       = "EC2 Network In/Out"
+          view        = "timeSeries"
+          region      = var.aws_region
+          period      = 300
+          stat        = "Average"
           annotations = { horizontal = [] }
           metrics = [
-            ["AWS/EC2", "NetworkIn",  "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "NetworkIn", "InstanceId", var.public_instance_id],
             ["AWS/EC2", "NetworkOut", "InstanceId", var.public_instance_id]
           ]
         }
@@ -114,16 +114,16 @@ resource "aws_cloudwatch_dashboard" "main" {
         width  = 12
         height = 6
         properties = {
-          title   = "EC2 Status Checks"
-          view    = "timeSeries"
-          region  = var.aws_region
-          period  = 60
-          stat    = "Maximum"
+          title       = "EC2 Status Checks"
+          view        = "timeSeries"
+          region      = var.aws_region
+          period      = 60
+          stat        = "Maximum"
           annotations = { horizontal = [] }
           metrics = [
-            ["AWS/EC2", "StatusCheckFailed",          "InstanceId", var.public_instance_id],
-            ["AWS/EC2", "StatusCheckFailed_Instance",  "InstanceId", var.public_instance_id],
-            ["AWS/EC2", "StatusCheckFailed_System",    "InstanceId", var.public_instance_id]
+            ["AWS/EC2", "StatusCheckFailed", "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "StatusCheckFailed_Instance", "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "StatusCheckFailed_System", "InstanceId", var.public_instance_id]
           ]
         }
       },
@@ -134,11 +134,11 @@ resource "aws_cloudwatch_dashboard" "main" {
         width  = 12
         height = 6
         properties = {
-          title   = "S3 Bucket Size"
-          view    = "timeSeries"
-          region  = var.aws_region
-          period  = 86400
-          stat    = "Average"
+          title       = "S3 Bucket Size"
+          view        = "timeSeries"
+          region      = var.aws_region
+          period      = 86400
+          stat        = "Average"
           annotations = { horizontal = [] }
           metrics = [
             ["AWS/S3", "BucketSizeBytes", "BucketName", var.s3_bucket_name, "StorageType", "StandardStorage"]

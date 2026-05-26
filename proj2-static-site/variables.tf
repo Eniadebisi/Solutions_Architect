@@ -30,7 +30,7 @@ variable "key_name" {
 variable "alarm_email" {
   description = "Email address for CloudWatch alarm notifications"
   type        = string
-  default = "enioluwa.adebisi@techconsulting.tech"
+  default     = "enioluwa.adebisi@techconsulting.tech"
 }
 
 variable "website_index" {

@@ -21,13 +21,13 @@ resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website.id
 
   index_document { suffix = var.website_index }
-  error_document { key    = var.website_error }
+  error_document { key = var.website_error }
 }
 
 resource "aws_s3_bucket_policy" "public_read" {
   bucket = aws_s3_bucket.website.id
 
-  
+
   depends_on = [aws_s3_bucket_public_access_block.website]
 
   policy = jsonencode({

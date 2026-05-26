@@ -22,7 +22,7 @@ resource "aws_instance" "public" {
   vpc_security_group_ids = [var.public_sg_id]
   key_name               = var.key_name
 
-  user_data = <<-EOF
+  user_data  = <<-EOF
     #!/bin/bash
     yum update -y
     yum install -y httpd
@@ -31,7 +31,7 @@ resource "aws_instance" "public" {
     echo "<h1>EC2 Web Server - ${var.project_name}</h1><p>Instance ID: $(curl -s http://169.254.169.254/latest/meta-data/instance-id)</p>" > /var/www/html/index.html
   EOF
   monitoring = false
-  tags = { Name = "${var.project_name}-public-ec2" }
+  tags       = { Name = "${var.project_name}-public-ec2" }
 }
 
 
@@ -43,6 +43,6 @@ resource "aws_instance" "private" {
   subnet_id              = var.private_subnet_id
   vpc_security_group_ids = [var.private_sg_id]
   key_name               = var.key_name
-  monitoring = false
-  tags = { Name = "${var.project_name}-private-ec2" }
+  monitoring             = false
+  tags                   = { Name = "${var.project_name}-private-ec2" }
 }

@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-variable "project_name"  { type = string }
-variable "aws_region"          { type = string }
+variable "project_name" { type = string }
+variable "aws_region" { type = string }
 variable "website_index" { type = string }
 variable "website_error" { type = string }

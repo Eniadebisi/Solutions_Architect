@@ -10,7 +10,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1) 
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1)
   availability_zone       = var.az_a
   map_public_ip_on_launch = true
 
@@ -19,7 +19,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2) 
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2)
   availability_zone = var.az_b
 
   tags = { Name = "${var.project_name}-private-subnet" }
@@ -63,7 +63,7 @@ resource "aws_security_group" "public_ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] 
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
