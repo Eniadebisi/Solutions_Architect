@@ -83,55 +83,59 @@ resource "aws_cloudwatch_dashboard" "main" {
           title  = "EC2 CPU Utilization"
           view   = "timeSeries"
           period = 300
+          stat   = "Average"
           metrics = [
-            ["AWS/EC2", "CPUUtilization", "InstanceId", var.public_instance_id, { label = "Public EC2" }],
-            ["AWS/EC2", "CPUUtilization", "InstanceId", var.private_instance_id, { label = "Private EC2" }]
+            ["AWS/EC2", "CPUUtilization", "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "CPUUtilization", "InstanceId", var.private_instance_id]
           ]
         }
       },
       {
         type   = "metric"
         x      = 12
-        y = 0
-        width = 12
+        y      = 0
+        width  = 12
         height = 6
         properties = {
           title  = "EC2 Network In/Out"
           view   = "timeSeries"
           period = 300
+          stat   = "Average"
           metrics = [
-            ["AWS/EC2", "NetworkIn",  "InstanceId", var.public_instance_id, { label = "NetworkIn" }],
-            ["AWS/EC2", "NetworkOut", "InstanceId", var.public_instance_id, { label = "NetworkOut" }]
+            ["AWS/EC2", "NetworkIn",  "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "NetworkOut", "InstanceId", var.public_instance_id]
           ]
         }
       },
       {
         type   = "metric"
         x      = 0
-        y = 6
-        width = 12
+        y      = 6
+        width  = 12
         height = 6
         properties = {
           title  = "EC2 Status Checks"
           view   = "timeSeries"
           period = 60
+          stat   = "Maximum"
           metrics = [
-            ["AWS/EC2", "StatusCheckFailed",         "InstanceId", var.public_instance_id],
-            ["AWS/EC2", "StatusCheckFailed_Instance", "InstanceId", var.public_instance_id],
-            ["AWS/EC2", "StatusCheckFailed_System",   "InstanceId", var.public_instance_id]
+            ["AWS/EC2", "StatusCheckFailed",          "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "StatusCheckFailed_Instance",  "InstanceId", var.public_instance_id],
+            ["AWS/EC2", "StatusCheckFailed_System",    "InstanceId", var.public_instance_id]
           ]
         }
       },
       {
         type   = "metric"
         x      = 12
-        y = 6
-        width = 12
+        y      = 6
+        width  = 12
         height = 6
         properties = {
           title  = "S3 Bucket Size (bytes)"
           view   = "timeSeries"
-          period = 86400 # S3 metrics update daily
+          period = 86400
+          stat   = "Average"
           metrics = [
             ["AWS/S3", "BucketSizeBytes", "BucketName", var.s3_bucket_name, "StorageType", "StandardStorage"]
           ]
@@ -140,9 +144,9 @@ resource "aws_cloudwatch_dashboard" "main" {
       {
         type   = "alarm"
         x      = 0
- y = 12
- width = 24
- height = 3
+        y      = 12
+        width  = 24
+        height = 3
         properties = {
           title = "Alarm Status"
           alarms = [
