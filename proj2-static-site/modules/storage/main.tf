@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "website" {
   bucket = "${var.project_name}-static-site-${random_id.suffix.hex}"
-
   tags = { Name = "${var.project_name}-website" }
 }
 
@@ -19,7 +18,6 @@ resource "aws_s3_bucket_public_access_block" "website" {
 
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website.id
-
   index_document { suffix = var.website_index }
   error_document { key = var.website_error }
 }

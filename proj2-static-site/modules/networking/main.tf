@@ -47,8 +47,6 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-
-
 resource "aws_security_group" "public_ec2" {
   name        = "${var.project_name}-public-sg"
   description = "Allow SSH and HTTP inbound; all outbound"
