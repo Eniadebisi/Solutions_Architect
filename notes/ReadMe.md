@@ -29,7 +29,6 @@
 * **Data Streaming & Ingestion:** [Amazon Kinesis (Data Streams/Firehose)](https://docs.aws.amazon.com/kinesis/), [Amazon MSK (Managed Kafka)](https://docs.aws.amazon.com/msk/)
 * **Analytics & Big Data:** [Amazon Athena](https://docs.aws.amazon.com/athena/), [Amazon EMR](https://docs.aws.amazon.com/emr/), [AWS Glue](https://docs.aws.amazon.com/glue/), [Amazon Redshift](https://docs.aws.amazon.com/redshift/)
 
-
 ## Domain 4: [Design Cost-Optimized Architectures](4/Overview.md) (20%)
 
 * **Storage Tiering:** [Amazon S3 Lifecycle Policies (Glacier Flexible/Deep Archive)](https://docs.aws.amazon.com/s3/)
@@ -37,5 +36,3 @@
 * **Compute Optimization:** [AWS Purchasing Options (Spot, RI, Savings Plans)](), [AWS Compute Optimizer]()
 * **Network Optimization:** [AWS Transit Gateway](), VPC Peering, NAT Gateway (vs. NAT Instances)
 * **Cost Management:** [AWS Cost Explorer](), [AWS Budgets](), AWS Cost and Usage Report (CUR)
-
-

@@ -50,7 +50,6 @@ GitHub Actions
 
 ## Pipeline Flow
 
-
 ### Trigger to Deploy (full journey)
 
 ```

@@ -14,7 +14,6 @@ data "aws_ami" "amazon_linux_2" {
 }
 
 
-
 resource "aws_instance" "public" {
   ami                    = data.aws_ami.amazon_linux_2.id
   instance_type          = var.instance_type
@@ -33,7 +32,6 @@ resource "aws_instance" "public" {
   monitoring = false
   tags       = { Name = "${var.project_name}-public-ec2" }
 }
-
 
 
 

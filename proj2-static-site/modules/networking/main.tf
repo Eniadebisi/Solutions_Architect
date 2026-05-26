@@ -7,7 +7,6 @@ resource "aws_vpc" "main" {
 }
 
 
-
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1)
@@ -24,7 +23,6 @@ resource "aws_subnet" "private" {
 
   tags = { Name = "${var.project_name}-private-subnet" }
 }
-
 
 
 resource "aws_internet_gateway" "igw" {
@@ -48,8 +46,6 @@ resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
 }
-
-
 
 
 

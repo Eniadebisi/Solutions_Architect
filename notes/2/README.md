@@ -1,6 +1,5 @@
 # Domain 2: Design Resilient Architectures (26%)
 
-
 ## [Amazon Route 53](https://docs.aws.amazon.com/route53/)
 - [ ] Configure DNS routing policies: Latency, Geolocation, Geoproximity, and Weighted distribution.
 - [ ] Design active-passive failover mechanisms driven by Route 53 Health Checks.

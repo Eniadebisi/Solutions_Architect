@@ -1,6 +1,5 @@
 # Domain 4: Design Cost-Optimized Architectures (20%)
 
-
 ## [Amazon S3 Lifecycle Management](https://docs.aws.amazon.com/s3/)
 - [ ] Implement object tiering configurations (Standard-IA, One Zone-IA, Glacier Flexible, Glacier Deep Archive).
 - [ ] Automate object migrations and expirations based on retention patterns using S3 Lifecycle Rules.
