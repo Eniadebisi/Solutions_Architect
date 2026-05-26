@@ -6,11 +6,11 @@ resource "aws_vpc" "main" {
   tags = { Name = "${var.project_name}-vpc" }
 }
 
-# ── Subnets ────────────────────────────────────────────────────────────────────
+
 
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1) # 10.0.1.0/24
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1) 
   availability_zone       = var.az_a
   map_public_ip_on_launch = true
 
@@ -19,13 +19,13 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2) # 10.0.2.0/24
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, 2) 
   availability_zone = var.az_b
 
   tags = { Name = "${var.project_name}-private-subnet" }
 }
 
-# ── Internet Gateway + Routing ─────────────────────────────────────────────────
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
@@ -49,9 +49,9 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-# Private subnet has no route to IGW — traffic stays internal only
 
-# ── Security Groups ────────────────────────────────────────────────────────────
+
+
 
 resource "aws_security_group" "public_ec2" {
   name        = "${var.project_name}-public-sg"
@@ -63,7 +63,7 @@ resource "aws_security_group" "public_ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Restrict to your IP in production
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 
   ingress {

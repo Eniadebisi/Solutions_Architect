@@ -27,7 +27,7 @@ resource "aws_s3_bucket_website_configuration" "website" {
 resource "aws_s3_bucket_policy" "public_read" {
   bucket = aws_s3_bucket.website.id
 
-  # depends_on ensures public access block is removed before policy is applied
+  
   depends_on = [aws_s3_bucket_public_access_block.website]
 
   policy = jsonencode({
@@ -42,7 +42,7 @@ resource "aws_s3_bucket_policy" "public_read" {
   })
 }
 
-# ── Upload website files ───────────────────────────────────────────────────────
+
 
 resource "aws_s3_object" "index" {
   bucket       = aws_s3_bucket.website.id

@@ -14,7 +14,7 @@ provider "aws" {
 
 module "networking" {
   source = "./modules/networking"
-
+  aws_region          = var.aws_region
   project_name = var.project_name
   vpc_cidr     = var.vpc_cidr
   az_a         = "${var.aws_region}a"
@@ -23,7 +23,7 @@ module "networking" {
 
 module "storage" {
   source = "./modules/storage"
-
+  aws_region          = var.aws_region
   project_name  = var.project_name
   website_index = var.website_index
   website_error = var.website_error
@@ -43,8 +43,8 @@ module "compute" {
 
 module "monitoring" {
   source = "./modules/monitoring"
-
   project_name        = var.project_name
+  aws_region          = var.aws_region
   public_instance_id  = module.compute.public_instance_id
   private_instance_id = module.compute.private_instance_id
   s3_bucket_name      = module.storage.bucket_name
