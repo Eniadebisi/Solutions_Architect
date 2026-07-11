@@ -1,0 +1,5 @@
+project_name     = "world-cup"
+football_api_url = "https://api.football-data.org/v4"
+
+# Set the API key via environment variable instead of this file:
+#   export TF_VAR_football_api_key="your-key-here"

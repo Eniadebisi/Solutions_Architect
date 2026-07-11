@@ -1,0 +1,15 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+!*.tfvars.example
+.terraformrc
+terraform.rc
+
+# Local scratch — contains real account IDs / ARNs, never commit
+.env
+argocd-deploy-key
+argocd-deploy-key.pub

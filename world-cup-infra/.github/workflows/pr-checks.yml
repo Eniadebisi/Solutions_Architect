@@ -1,0 +1,232 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "world-cup-infra/terraform/**"
+      - "world-cup-infra/helm/**"
+      - "world-cup-infra/argocd/**"
+      - ".github/workflows/**"
+
+permissions:
+  id-token: write   # OIDC token for AWS auth
+  contents: read
+  pull-requests: write  # post plan output as PR comment
+
+env:
+  TF_VERSION: "1.9.0"
+  AWS_REGION: us-east-1
+
+jobs:
+
+  # ── 1. Formatting ────────────────────────────────────────────────────────
+  fmt-check:
+    name: Terraform Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      # terraform fmt -check exits non-zero if any file needs reformatting.
+      # Run against each directory separately so the error points at the right stack.
+      - name: fmt — modules
+        run: terraform fmt -check -recursive
+        working-directory: world-cup-infra/terraform/modules
+
+      - name: fmt — global
+        run: terraform fmt -check -recursive
+        working-directory: world-cup-infra/terraform/global
+
+      - name: fmt — platform
+        run: terraform fmt -check -recursive
+        working-directory: world-cup-infra/terraform/platform
+
+  # ── 2. Validate (no backend, no remote state needed) ────────────────────
+  validate:
+    name: Terraform Validate
+    runs-on: ubuntu-latest
+    needs: fmt-check
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # INFRA_CI_ROLE_ARN is a GitHub Actions variable set after the first
+          # local terraform apply outputs infra_ci_role_arn.
+          role-to-assume: ${{ vars.INFRA_CI_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # -backend=false skips S3 connection but still downloads providers/modules.
+      - name: validate — global
+        working-directory: world-cup-infra/terraform/global
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+      - name: validate — platform
+        working-directory: world-cup-infra/terraform/platform
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+  # ── 3. Plan — global stack ───────────────────────────────────────────────
+  plan-global:
+    name: Plan — global
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.INFRA_CI_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Init
+        working-directory: world-cup-infra/terraform/global
+        run: terraform init
+
+      - name: Plan
+        id: plan
+        working-directory: world-cup-infra/terraform/global
+        # Write plan output to a file so we can post it as a PR comment.
+        # continue-on-error lets us post the comment even when plan fails.
+        run: |
+          terraform plan -no-color 2>&1 | tee plan.txt
+          exit ${PIPESTATUS[0]}
+        continue-on-error: true
+
+      - name: Comment plan on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let plan = fs.readFileSync('world-cup-infra/terraform/global/plan.txt', 'utf8');
+            if (plan.length > 60000) plan = plan.slice(0, 60000) + '\n…(truncated)';
+            const outcome = '${{ steps.plan.outcome }}';
+            const icon = outcome === 'success' ? '✅' : '❌';
+            const body = `### ${icon} Global stack plan (${outcome})\n\`\`\`terraform\n${plan}\n\`\`\``;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      # Fail the job if plan failed (after the comment is posted)
+      - name: Fail if plan failed
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+  # ── 4. Plan — platform stack ─────────────────────────────────────────────
+  plan-platform:
+    name: Plan — platform
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.INFRA_CI_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Init
+        working-directory: world-cup-infra/terraform/platform
+        run: terraform init
+
+      - name: Plan
+        id: plan
+        working-directory: world-cup-infra/terraform/platform
+        # Platform reads from global remote state. If global has never been applied
+        # this plan will fail — that is expected on a brand-new repo.
+        run: |
+          terraform plan -no-color 2>&1 | tee plan.txt
+          exit ${PIPESTATUS[0]}
+        continue-on-error: true
+
+      - name: Comment plan on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let plan = fs.readFileSync('world-cup-infra/terraform/platform/plan.txt', 'utf8');
+            if (plan.length > 60000) plan = plan.slice(0, 60000) + '\n…(truncated)';
+            const outcome = '${{ steps.plan.outcome }}';
+            const icon = outcome === 'success' ? '✅' : '❌';
+            const body = `### ${icon} Platform stack plan (${outcome})\n\`\`\`terraform\n${plan}\n\`\`\``;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Fail if plan failed
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+  # ── 5. Helm lint ─────────────────────────────────────────────────────────
+  helm-lint:
+    name: Helm Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v4
+
+      # helm lint catches template rendering errors and schema violations.
+      - name: Lint chart
+        run: helm lint world-cup-infra/helm/world-cup/
+
+  # ── 6. Security scanning ─────────────────────────────────────────────────
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Trivy scans Terraform and Helm files for misconfigurations
+      # (open security groups, unencrypted buckets, missing resource limits, etc.)
+      - name: Trivy — Terraform
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: world-cup-infra/terraform/
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
+      - name: Trivy — Helm
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: world-cup-infra/helm/
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
+      # Snyk IaC catches different misconfigs than Trivy — worth running both.
+      # continue-on-error: true so the PR isn't blocked while building a baseline.
+      # Flip to false once all findings are acknowledged.
+      - name: Snyk IaC
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high world-cup-infra/terraform/
+        continue-on-error: true

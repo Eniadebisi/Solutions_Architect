@@ -1,0 +1,106 @@
+name: Terraform Apply
+
+# Manual trigger only — choose which stack to apply.
+# Run global first when setting up from scratch.
+# Platform reads from global remote state, so global must exist first.
+on:
+  workflow_dispatch:
+    inputs:
+      stack:
+        description: "Stack to apply"
+        required: true
+        type: choice
+        options:
+          - global
+          - platform
+          - both
+
+permissions:
+  id-token: write  # OIDC token for AWS auth
+  contents: read
+
+env:
+  TF_VERSION: "1.9.0"
+  AWS_REGION: us-east-1
+
+jobs:
+
+  # ── Apply global (ECR, IAM, football-api secret) ─────────────────────────
+  apply-global:
+    name: Apply — global
+    runs-on: ubuntu-latest
+    if: inputs.stack == 'global' || inputs.stack == 'both'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.INFRA_CI_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Init
+        working-directory: world-cup-infra/terraform/global
+        run: terraform init
+
+      - name: Plan
+        working-directory: world-cup-infra/terraform/global
+        run: terraform plan -no-color -out=tfplan
+
+      # Auto-approve is safe here because a plan was shown above in the same job.
+      # For stricter control, remove -auto-approve and require a manual approval
+      # step using a GitHub Environment with required reviewers.
+      - name: Apply
+        working-directory: world-cup-infra/terraform/global
+        run: terraform apply -auto-approve tfplan
+
+      - name: Show outputs
+        working-directory: world-cup-infra/terraform/global
+        run: terraform output
+
+  # ── Apply platform (VPC, EKS, RDS, ESO role) ─────────────────────────────
+  apply-platform:
+    name: Apply — platform
+    runs-on: ubuntu-latest
+    needs: apply-global
+    # Run platform when:
+    #   - stack == 'platform' (apply-global was skipped)
+    #   - stack == 'both'     (apply-global succeeded)
+    # Do NOT run if apply-global failed.
+    if: |
+      always() &&
+      (needs.apply-global.result == 'success' || needs.apply-global.result == 'skipped') &&
+      (inputs.stack == 'platform' || inputs.stack == 'both')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.INFRA_CI_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Init
+        working-directory: world-cup-infra/terraform/platform
+        run: terraform init
+
+      # EKS takes ~12 min, RDS ~5 min — set a generous timeout
+      - name: Plan
+        working-directory: world-cup-infra/terraform/platform
+        run: terraform plan -no-color -out=tfplan
+        timeout-minutes: 15
+
+      - name: Apply
+        working-directory: world-cup-infra/terraform/platform
+        run: terraform apply -auto-approve tfplan
+        timeout-minutes: 30
+
+      - name: Show outputs
+        working-directory: world-cup-infra/terraform/platform
+        run: terraform output

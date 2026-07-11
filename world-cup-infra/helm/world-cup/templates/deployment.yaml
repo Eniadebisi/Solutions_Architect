@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-cup-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: world-cup-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: world-cup-api
+  template:
+    metadata:
+      labels:
+        app: world-cup-api
+    spec:
+      serviceAccountName: world-cup-api
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          env:
+            - name: DB_HOST
+              value: {{ .Values.db.host | quote }}
+            - name: DB_PORT
+              value: {{ .Values.db.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.db.name | quote }}
+            - name: FOOTBALL_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: world-cup-secrets
+                  key: FOOTBALL_API_KEY
+            - name: FOOTBALL_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: world-cup-secrets
+                  key: FOOTBALL_API_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: world-cup-secrets
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: world-cup-secrets
+                  key: DB_PASSWORD
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10

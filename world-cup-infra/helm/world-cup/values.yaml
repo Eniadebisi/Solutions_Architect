@@ -1,0 +1,35 @@
+image:
+  repository: 866934333672.dkr.ecr.us-east-1.amazonaws.com/world-cup
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 2
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+# IAM role ARN for the ESO service account (set after terraform apply)
+esoRoleArn: ""
+
+# AWS Secrets Manager secret names
+secrets:
+  footballApi: "world-cup/football-api"
+  # RDS managed secret ARN — fill in after terraform apply
+  dbSecretArn: ""
+
+# PostgreSQL connection (non-sensitive parts)
+db:
+  host: ""   # fill in after terraform apply (RDS endpoint)
+  port: "5432"
+  name: "world_cup"

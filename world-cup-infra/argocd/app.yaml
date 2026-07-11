@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: world-cup
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Eniadebisi/Solutions_Architect.git
+    targetRevision: main
+    path: world-cup-infra/helm/world-cup
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: world-cup
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
