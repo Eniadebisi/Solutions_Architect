@@ -2,7 +2,7 @@
 
 ## Domain 1: [Design Secure Architectures](1/Readme.md) (30%)
 
-* **Identity & Access:** [AWS IAM](https://docs.aws.amazon.com/iam/), [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/), [AWS STS](https://www.google.com/search?q=https://docs.aws.amazon.com/STS/)
+* **Identity & Access:** [AWS IAM](https://docs.aws.amazon.com/iam/), [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/), [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html)
 * **Governance & Multi-Account:** [AWS Organizations](https://docs.aws.amazon.com/organizations/), [AWS Control Tower](https://docs.aws.amazon.com/controltower/)
 * **Network Security:** [Amazon VPC (NACLs/Security Groups)](https://docs.aws.amazon.com/vpc/), [AWS PrivateLink (VPC Endpoints)](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-Readme.html)
 * **Perimeter Defense:** [AWS WAF](https://docs.aws.amazon.com/waf/), [AWS Shield](https://docs.aws.amazon.com/shield/), [AWS Firewall Manager](https://docs.aws.amazon.com/firewall-manager/)
@@ -12,12 +12,12 @@
 
 ## Domain 2: [Design Resilient Architectures](2/Readme.md) (26%)
 
-* **Compute Availability:** [Amazon EC2 Auto Scaling](https://www.google.com/search?q=https://docs.aws.amazon.com/autoscaling/ec2/), [AWS Lambda](https://docs.aws.amazon.com/lambda/)
+* **Compute Availability:** [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/), [AWS Lambda](https://docs.aws.amazon.com/lambda/)
 * **Traffic Management:** [Elastic Load Balancing (ALB/NLB/GLB)](https://docs.aws.amazon.com/elasticloadbalancing/), [Amazon Route 53](https://docs.aws.amazon.com/route53/)
-* **Container Orchestration:** [Amazon ECS](https://docs.aws.amazon.com/ecs/), [Amazon EKS](https://docs.aws.amazon.com/eks/), [AWS Fargate](https://www.google.com/search?q=https://docs.aws.amazon.com/fargate/)
+* **Container Orchestration:** [Amazon ECS](https://docs.aws.amazon.com/ecs/), [Amazon EKS](https://docs.aws.amazon.com/eks/), [AWS Fargate](https://docs.aws.amazon.com/fargate/)
 * **Asynchronous Messaging:** [Amazon SQS](https://docs.aws.amazon.com/sqs/), [Amazon SNS](https://docs.aws.amazon.com/sns/), [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/)
 * **Workflow Orchestration:** [AWS Step Functions](https://docs.aws.amazon.com/step-functions/)
-* **Database Resilience:** [Amazon RDS Proxy](https://www.google.com/search?q=https://docs.aws.amazon.com/rds/proxy/), [Amazon Aurora (Global Databases/Multi-AZ)](https://www.google.com/search?q=https://docs.aws.amazon.com/rds/latest/AuroraUserGuide/aurora-global-databases.html)
+* **Database Resilience:** [Amazon RDS Proxy](https://docs.aws.amazon.com/rds/proxy/), [Amazon Aurora (Global Databases/Multi-AZ)](https://docs.aws.amazon.com/rds/latest/AuroraUserGuide/aurora-global-databases.html)
 * **Observability:** [Amazon CloudWatch](https://docs.aws.amazon.com/cloudwatch/), [AWS X-Ray](https://docs.aws.amazon.com/xray/)
 
 ## Domain 3: [Design High-Performing Architectures](3/Readme.md) (24%)
@@ -25,7 +25,7 @@
 * **High-Performance Storage:** [Amazon EBS (io2/gp3)](https://docs.aws.amazon.com/ebs/), [Amazon EFS](https://docs.aws.amazon.com/efs/), [Amazon FSx (Lustre/ONTAP)](https://docs.aws.amazon.com/fsx/)
 * **Caching & Content Delivery:** [Amazon CloudFront](https://docs.aws.amazon.com/cloudfront/), [Amazon ElastiCache (Redis/Memcached)](https://docs.aws.amazon.com/elasticache/)
 * **Performance Routing:** [AWS Global Accelerator](https://docs.aws.amazon.com/global-accelerator/)
-* **NoSQL Performance:** [Amazon DynamoDB (DAX/Streams)](https://www.google.com/search?q=https://docs.aws.amazon.com/amazondynamodb/)
+* **NoSQL Performance:** [Amazon DynamoDB (DAX/Streams)](https://docs.aws.amazon.com/amazondynamodb/)
 * **Data Streaming & Ingestion:** [Amazon Kinesis (Data Streams/Firehose)](https://docs.aws.amazon.com/kinesis/), [Amazon MSK (Managed Kafka)](https://docs.aws.amazon.com/msk/)
 * **Analytics & Big Data:** [Amazon Athena](https://docs.aws.amazon.com/athena/), [Amazon EMR](https://docs.aws.amazon.com/emr/), [AWS Glue](https://docs.aws.amazon.com/glue/), [Amazon Redshift](https://docs.aws.amazon.com/redshift/)
 
