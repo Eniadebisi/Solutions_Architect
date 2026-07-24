@@ -10,3 +10,7 @@ terraform.tfstate.backup
 *.tfvars              
 crash.log
 override.tf
+notes/.obsidian/app.json
+notes/.obsidian/appearance.json
+notes/.obsidian/core-plugins.json
+notes/.obsidian/workspace.json
